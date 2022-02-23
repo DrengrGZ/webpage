@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!--link a google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap" rel="stylesheet">
+
+    <!--Importamos una libreria que nos permite realizar animaciones faciles en js-->
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.1.2/dist/kute.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Fira', sans-serif;
+            color: white;
+            background: #202731;
+            overflow-x: hidden;
+            /*con esto ocultamos el overflow causado por la curva css*/
+        }
+
+        /* la posicion relative sirve la funcion de hacer que los hijos esten en posicion absoluta dentro
+sin alterar la posicion de la section, absolutamente necesario cuando juguemos con los fondos.*/
+        /*añadiremos flexbox para hacerlo un contenedor flexible para pode centrar el contenido de cada seccion, asi tambien, podremos experimentar con 
+las posiciones de flex desde las tools del navegador*/
+
+        section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 400px;
+            padding: 100px 20vw;
+            /*vw para vewport width que nos dara un 20% de margen en el ancho real, para hacer el diseño mas responsive en diferentes dispositivos*/
+        }
+
+        .blue {
+            background: #3c31dd;
+        }
+
+        .red {
+            background: #dd3f31;
+        }
+
+        .light-purple {
+            background: #cd6fff;
+        }
+
+        .dark {
+            background: #0f0f10;
+        }
+
+        .lessdark {
+            background: #1d1d1d;
+        }
+
+        /*haremos una curva en puro css a modo de experimento y demostracion*/
+        /*debido a la establecida posicion relativa, la curva se insertara en el div en vez de en el body general del html*/
+        .curva {
+            position: absolute;
+            height: 225px;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /*before y after son pseudoelementos invisibles en el html que apuntamos con el css, para crear lo que tecnicamente es una interseccion de circulos que crea la ilusion de curva*/
+        .curva::before {
+            content: '';
+            display: block;
+            position: absolute;
+            border-radius: 100% 50%;
+            /*con un solo valor saldría un circulo perfecto, pero con dos creamos una elipse*/
+            width: 55%;
+            height: 100%;
+            background-color: #202731;
+            transform: translate(85%, 60%);
+            /*usaremos la propiedad transform con translate para manipular los ejes X e Y de la curva*/
+        }
+
+        .curva::after {
+            content: '';
+            display: block;
+            position: absolute;
+            border-radius: 100% 50%;
+            width: 55%;
+            height: 100%;
+            background-color: #3c31dd;
+            transform: translate(-4%, 40%);
+            z-index: -1;
+            /*con esto aseguamos que el elemento oscuro estará por encima del claro*/
+        }
+
+        /*apuntamos solo el pseudoelemento after con un radio elíptico con posicionamiento absoluto*/
+        /* .burbuja::after {
+            content: '';
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50%, 100%;
+            position: absolute;
+            bottom: 0;
+            height: 85%;
+            width: 100%;
+            background-color: #0f0f10;
+            z-index: -1;
+        }
+*/
+        .wave {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+            ;
+        }
+
+        .wave svg {
+            position: relative;
+            display: block;
+            width: calc(131% + 1.3px);
+            height: 380px;
+        }
+
+        .wave .shape-fill {
+            fill: #1D1D1D;
+        }
+
+        /*usaremos una funcion relativamente nueva, aspect-ratio, que nos permite fijar este que define, en vez de jugar con los valores de widht y height*/
+        /*usaremos despues un svg como fondo en este ratio de medidas*/
+        /*elegido 960x300 por comodidad de tener un fondo ancho*/
+        .spacer {
+            aspect-ratio: 960/300;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+
+        /*creamos una clase con la imagen svg por si se quiere utilizar repetidas veces*/
+        .waveRtoY {
+            background-image: url('svg/wave-red-yellow-up.svg');
+        }
+
+        .swavepurple {
+            background-image: url('svg/sacked-wave-purple.svg');
+        }
+
+        /*creamos la clase flip para rotar el objeto llamado blob*/
+        .flip {
+            transform: rotate(180deg);
+        }
+
+        .blob-motion {
+            position: absolute;
+            transform: translateY(-20%);
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+    <section class="blue">
+        <h1>Curvas</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae expedita amet asperiores vitae non,
+            debitis sunt alias optio. Atque quos rem esse facere laboriosam error perferendis hic id facilis sed.</p>
+
+        <!--Añandimos un div vacio para añadir una curva, y por si queremos poner contenido en ella-->
+        <div class="curva"></div>
+
+    </section>
+    <section>
+        <h1>Curvas</h1>
+        <p>Recusandae nihil exercitationem natus temporibus. Sed sit magnam deleniti sunt veritatis eos quasi
+            repellendus porro, ut iure? Consequuntur, culpa nihil illum fuga praesentium voluptate eos, atque, suscipit
+            incidunt iste esse?</p>
+    </section>
+    <section class="lessdark">
+        <h1>Curvas</h1>
+        <p>Porro, nesciunt itaque sed eaque maxime non dignissimos consectetur dolor nostrum ipsa perspiciatis iure
+            neque beatae assumenda accusantium dolore cumque possimus labore natus quia harum laborum sequi quisquam
+            fugit. Illum!</p>
+    </section>
+    <section class="red">
+        <h1>Curvas</h1>
+        <p>Cum, ab natus expedita blanditiis reprehenderit recusandae eaque debitis iure, autem aspernatur delectus et
+            esse. Adipisci perferendis dicta maxime aut odio aspernatur harum, corporis rem deleniti, obcaecati magni
+            assumenda vero.</p>
+
+        <!--grafico svg obtenido en shapedivider.app-->
+        <div class="wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                preserveAspectRatio="none">
+                <path
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                    class="shape-fill"></path>
+            </svg>
+        </div>
+    </section>
+
+    <div class="spacer waveRtoY"></div>
+
+    <section>
+        <h1>Curvas</h1>
+        <p>Possimus eaque ipsa voluptatibus earum et, at sed nemo perspiciatis corporis, nam doloribus nostrum officiis
+            aut provident necessitatibus minima cum id molestias. Eius, quaerat! Necessitatibus perspiciatis doloribus
+            delectus quibusdam voluptatibus!</p>
+    </section>
+
+    <div class="spacer swavepurple flip"></div>
+    <section class="light-purple">
+        <h1>Curvas</h1>
+        <p>Repellat dignissimos, minus ad quo ab dolorum ut impedit ratione debitis sunt natus, aperiam laboriosam? Modi
+            quos expedita nihil quaerat, doloremque ullam excepturi inventore provident? Dolore odit nulla sit. Sequi.
+        </p>
+        <!--copiamos y pegamos el codigo del svg asociado a la figura blob, eliminamos la seccion rectangular y formatamos el codigo para que sea legible-->
+        <svg id="visual" viewBox="0 0 900 600" width="900" height="600" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+            <g transform="translate(461.7716557456657 290.3710594636153)">
+                <path id="blob1"
+                    d="M142.9 -147.7C176.4 -109.4 188.7 -54.7 179 -9.7C169.4 35.4 137.7 70.7 104.2 118.4C70.7 166 35.4 226 -10.6 236.6C-56.6 247.2 -113.1 208.5 -147.6 160.8C-182.1 113.1 -194.6 56.6 -201.6 -7.1C-208.7 -70.7 -210.4 -141.4 -175.9 -179.8C-141.4 -218.1 -70.7 -224 -8 -216C54.7 -208 109.4 -186 142.9 -147.7"
+                    fill="#BB004B"></path>
+            </g>
+        <!--traemos la seccion "g" del codigo del segundo svg de blob y la copiamos como si fuera un hijoxº-->
+            <g transform="translate(485.38610897786873 265.0369821231194)" style="visibility: hidden;"> <!--hidden para que no se vea en medio de la animacion-->
+                <path id="blob2"
+                    d="M113.8 -102.5C153.1 -74.5 194.6 -37.2 193.6 -0.9C192.7 35.4 149.4 70.7 110 120.4C70.7 170 35.4 234 -13 247C-61.3 259.9 -122.6 221.9 -172.6 172.2C-222.6 122.6 -261.3 61.3 -264.2 -2.9C-267.2 -67.2 -234.4 -134.4 -184.4 -162.4C-134.4 -190.4 -67.2 -179.2 -15 -164.2C37.2 -149.2 74.5 -130.5 113.8 -102.5"
+                    fill="#BB004B"></path>
+            </g>
+        </svg>
+        <!--activamos el script dandole instrucciones de que anime desde el blob1 al 2-->
+        <script>
+            const tween = KUTE.fromTo(
+                '#blob1',
+                { path: '#blob1' },
+                { path: '#blob2' },
+                { repeat: 999, duration: 1000, yoyo: true }
+            )
+
+            tween.start()
+        </script>
+    </section>
+    <div class="spacer swavepurple"></div>
+
+
+    <section>
+        <h1>Curvas</h1>
+        <p>Quidem aspernatur laboriosam nobis dolores atque neque culpa ipsa tempora ratione, sint nesciunt quam! Quidem
+            voluptatem deleniti at perspiciatis illo velit distinctio doloribus enim sapiente, quo, ipsa quam voluptatum
+            aut.</p>
+    </section>
+
+
+    <section>
+        <h1>Curvas</h1>
+        <p>Laudantium quod voluptatem repellat modi natus numquam officia ea corporis corrupti. Quod sapiente sint vero,
+            recusandae pariatur, amet error laboriosam ex nesciunt eveniet cumque, culpa ipsam natus placeat possimus?
+            Eveniet!</p>
+    </section>
+
+
+</body>
+
+</html>

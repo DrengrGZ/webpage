@@ -1,0 +1,10 @@
+Base html y CSS, extensivo uso de JS pues es lo que hay que demostrar en el proyecto (a mas js substituyendo css mejo)
+Mantener HTML limpio y simple, css bien ordenado y emplear como nota final sobre este utlimo el PostCSS
+
+Utilizaremos svg y los manipulamos con JS para crear una página llena de curvas coloridas
+
+Cambio de idioma de página en un click.
+
+Investigar modulos CSS
+Investigar frameworks como Boostrap
+Investigar React
